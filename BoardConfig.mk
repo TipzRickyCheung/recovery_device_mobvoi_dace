@@ -22,12 +22,11 @@
 #
 
 # Bootloader
-TARGET_BOOTLOADER_BOARD_NAME := msm8909
+TARGET_BOOTLOADER_BOARD_NAME := monaco
 TARGET_NO_BOOTLOADER := true
 
 # Platform
-TARGET_BOARD_PLATFORM := msm8909
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno304
+TARGET_BOARD_PLATFORM := monaco
 
 # Architecture
 TARGET_ARCH := arm
@@ -36,22 +35,34 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a7
 
+# Binder
+TARGET_USES_64_BIT_BINDER := true
+
 # Encryption
 PLATFORM_VERSION := 16.1.0
 PLATFORM_SECURITY_PATCH := 2099-12-31
 
 # Kernel
-BOARD_KERNEL_CMDLINE := androidboot.hardware=skipjack msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1
+BOARD_KERNEL_CMDLINE := androidboot.hardware=dace msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE        := 0x80008000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x81e00000
 BOARD_RAMDISK_OFFSET     := 0x82000000
-TARGET_PREBUILT_KERNEL := device/mobvoi/skipjack/zImage-dtb
+#TARGET_PREBUILT_KERNEL := device/mobvoi/dace/zImage-dtb
+
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_HEADER_ARCH := arm
+TARGET_KERNEL_SOURCE := kernel/mobvoi/monaco
+TARGET_KERNEL_CONFIG := \
+    generic_defconfig \
+    vendor/monaco.config \
+    vendor/debugfs.config
 
 # Partitions
 BOARD_HAS_LARGE_FILESYSTEM := true
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 71303168
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_COPY_OUT_VENDOR := vendor
